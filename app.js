@@ -38,17 +38,20 @@ async function voiceStateUpdateCallback(oldState, newState) {
   if (newState.channelId !== null && rightMembersArePresent(newState.channel.members)) {
     if (newState.member.id === process.env.TARGET_USER_ID) {
       console.log(`${newState.member.user.username} is in position, executing protocol D.CH3353.`);
-    }
     
-    richardPresenceMap.set(newState.guild.id.concat(newState.channelId), true);
-    await setTimeout(() => {
-      if (richardPresenceMap.get(newState.guild.id.concat(newState.channelId))) {
-        play(newState.channel);
-      }
-      else {
-        console.log('Mission failed. We\'ll get \'em next time.');
-      }
-    }, 60000);
+      richardPresenceMap.set(newState.guild.id.concat(newState.channelId), true);
+      await setTimeout(() => {
+        if (richardPresenceMap.get(newState.guild.id.concat(newState.channelId))) {
+          play(newState.channel);
+        }
+        else {
+          console.log('Mission failed. We\'ll get \'em next time.');
+        }
+      }, 60000);
+    }
+    else {
+      console.log('Protocol D.CH3353 is now in action.')
+    }
   }
   else {
     stopPlayback(newState);
