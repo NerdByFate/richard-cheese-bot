@@ -9,14 +9,13 @@ const player = new Player(client);
 
 // Variables
 var errors = 0;
-var richardPresenceMap = new Map();
 
 // Functions
-async function play(channel) {
+async function play(state, guildID) {
   let rand = Math.floor(Math.random() * Data.queries.length);
   
   try {
-    let dataOut = await player.play(channel, Data.queries[rand], { searchEngine: 'youtube', connectionOptions: { deaf: false } });
+    let dataOut = await player.play(state.channel, Data.queries[rand], { searchEngine: 'youtube', nodeOptions: { leaveOnEmpty: true, metadata: state }, connectionOptions: { deaf: false } });
     errors = 0;
     return dataOut.queue;
   }
@@ -24,7 +23,7 @@ async function play(channel) {
     console.error(error);
     errors++;
     if (errors <= 10) {
-      play(channel);
+      play(state);
     }
     else {
       console.log('Maximum failed searches exceeded.');
@@ -33,21 +32,24 @@ async function play(channel) {
   }
 }
 
-async function voiceStateUpdateCallback(oldState, newState) {
+async function playAfterWaitTime(state, channel) {
+  await setTimeout(() => {
+  if (channel && rightMembersArePresent(channel.members)) {
+        play(state);
+      }
+      else {
+        console.log('Mission failed. We\'ll get \'em next time.');
+      }
+    }, process.env.WAIT_TIME);
+}
+
+function voiceStateUpdateCallback(oldState, newState) {
   console.log(`${newState.channelId}: User ${newState.member.user.username} joined the channel.`);
   if (newState.channelId !== null && rightMembersArePresent(newState.channel.members)) {
     if (newState.member.id === process.env.TARGET_USER_ID) {
       console.log(`${newState.member.user.username} is in position, executing protocol D.CH3353.`);
-    
-      richardPresenceMap.set(newState.guild.id.concat(newState.channelId), true);
-      await setTimeout(() => {
-        if (richardPresenceMap.get(newState.guild.id.concat(newState.channelId))) {
-          play(newState.channel);
-        }
-        else {
-          console.log('Mission failed. We\'ll get \'em next time.');
-        }
-      }, 60000);
+      
+      playAfterWaitTime(newState, client.channels.cache.get(newState.channelId))
     }
     else {
       console.log('Protocol D.CH3353 is now in action.')
@@ -59,8 +61,6 @@ async function voiceStateUpdateCallback(oldState, newState) {
 }
 
 function stopPlayback(state) {
-  richardPresenceMap.delete(state.guild.id.concat(state.channelId));
-  
   const queue = player.nodes.get(state.guild.id);
   if (queue && !queue.deleted) queue.delete();
 }
@@ -83,5 +83,9 @@ client.on("ready", () => {
 });
 
 client.on("voiceStateUpdate", voiceStateUpdateCallback);
+
+player.events.on('emptyQueue', (queue) => {
+  playAfterWaitTime(queue.metadata, client.channels.cache.get(queue.metadata.channelId));
+});
 
 client.login(process.env.DISCORD_TOKEN);
