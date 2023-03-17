@@ -11,7 +11,7 @@ const player = new Player(client);
 var errors = 0;
 
 // Functions
-async function play(state, guildID) {
+async function play(state) {
   let rand = Math.floor(Math.random() * Data.queries.length);
   
   try {
