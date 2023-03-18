@@ -10,11 +10,9 @@ const player = new Player(client);
 // Functions
 
 /**
- * Plays a random song from the queries specified in queries.json.
- *
+ * @summary Plays a random song from the queries specified in queries.json.
  * This function will attempt to play again if it is unable to play due to an exception (e.g. the song cannot be found on YouTube).
  * This will increment errors until errors is greater than 10, after which it will stop attempting to play.
- * @summary Plays a random song from the queries specified in queries.json
  * @async
  * @param {VoiceState} state - A VoiceState object representing the current voice state of a Guild Member
  * @param {number} errors - The number of errors that have been encountered while attempting to play (optional)
@@ -40,12 +38,10 @@ async function play(state, errors) {
 }
 
 /**
- * Plays a random song after a period of time.
- * 
+ * @summary Plays a random song after a period of time.
  * The amount of time that elapses before playback begins is equal to the amount of time specified in
  * environment variable WAIT_TIME. Playback does not begin if the right GuildMembers are not present in
  * the channel after the wait time has elapsed.
- * @summary Plays a random song after a period of time
  * @async
  * @param {VoiceState} state - A VoiceState object representing the current voice state of a Guild Member
  * @param {VoiceChannel} channel - The VoiceChannel of the channel to play the song in
@@ -62,11 +58,9 @@ async function playAfterWaitTime(state, channel) {
 }
 
 /**
- * Plays a random song if the target member is in position.
- * 
+ * @summary Plays a random song if the target member is in position.
  * The function first decides whether that member is the target member and is alone in a voice channel.
  * If so, plays a random song from queries.json in that voice channel.
- * @summary Plays a random song if the target member is in position
  * @param {VoiceState} oldState - A VoiceState object representing the previous voice state of a Guild Member
  * @param {VoiceState} newState - A VoiceState object representing the current voice state of a Guild Member
  */
@@ -88,11 +82,9 @@ function voiceStateUpdateCallback(oldState, newState) {
 }
 
 /**
- * Stops all playback from this bot in a particular Guild.
- * 
+ * @summary Stops all playback from this bot in a particular Guild.
  * The function does this by first finding the queue associated with the channel of that Guild.
  * Then, it deletes it if it has not already been deleted.
- * @summary Stops all playback from this bot in a particular Guild
  * @param {VoiceState} state - A VoiceState object representing the current voice state of a Guild Member
  */
 function stopPlayback(state) {
@@ -101,11 +93,9 @@ function stopPlayback(state) {
 }
 
 /**
- * Determines if the target member is in position.
- *
+ * @summary Determines if the target member is in position.
  * This is true if the target member is either the only GuildMember in members,
  * or if they are only accompanied by the bot.
- * @summary Determines if the target member is in position
  * @param {Collection<Snowflake, GuildMember>} members - A Collection of GuildMember objects to search over
  * @returns {boolean} true if the target player is present and is either alone or only accompanied by the bot, false otherwise
  */
