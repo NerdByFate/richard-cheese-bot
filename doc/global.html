@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="play"><span class="type-signature">(async) </span>play<span class="signature">(state, errors)</span><span class="type-signature"> &rarr; {GuildQueue}</span></h4>
+    
+
+    
+    <p class="summary">Plays a random song from the queries specified in queries.json</p>
+    
+
+
+
+<div class="description">
+    Plays a random song from the queries specified in queries.json.
+
+This function will attempt to play again if it is unable to play due to an exception (e.g. the song cannot be found on YouTube).
+This will increment errors until errors is greater than 10, after which it will stop attempting to play.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">VoiceState</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A VoiceState object representing the current voice state of a Guild Member</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>errors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The number of errors that have been encountered while attempting to play (optional)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A queue containing the track and state metadata associated with the song chosen from queries.json
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">GuildQueue</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="playAfterWaitTime"><span class="type-signature">(async) </span>playAfterWaitTime<span class="signature">(state, channel)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary">Plays a random song after a period of time</p>
+    
+
+
+
+<div class="description">
+    Plays a random song after a period of time.
+
+The amount of time that elapses before playback begins is equal to the amount of time specified in
+environment variable WAIT_TIME. Playback does not begin if the right GuildMembers are not present in
+the channel after the wait time has elapsed.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">VoiceState</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A VoiceState object representing the current voice state of a Guild Member</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>channel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">VoiceChannel</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The VoiceChannel of the channel to play the song in</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line53">line 53</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="rightMembersArePresent"><span class="type-signature"></span>rightMembersArePresent<span class="signature">(members)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+    <p class="summary">Determines if the target member is in position</p>
+    
+
+
+
+<div class="description">
+    Determines if the target member is in position.
+
+This is true if the target member is either the only GuildMember in members,
+or if they are only accompanied by the bot.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>members</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Collection.&lt;Snowflake, GuildMember></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A Collection of GuildMember objects to search over</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line112">line 112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    true if the target player is present and is either alone or only accompanied by the bot, false otherwise
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="stopPlayback"><span class="type-signature"></span>stopPlayback<span class="signature">(state)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary">Stops all playback from this bot in a particular Guild</p>
+    
+
+
+
+<div class="description">
+    Stops all playback from this bot in a particular Guild.
+
+The function does this by first finding the queue associated with the channel of that Guild.
+Then, it deletes it if it has not already been deleted.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">VoiceState</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A VoiceState object representing the current voice state of a Guild Member</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="voiceStateUpdateCallback"><span class="type-signature"></span>voiceStateUpdateCallback<span class="signature">(oldState, newState)</span><span class="type-signature"></span></h4>
+    
+
+    
+    <p class="summary">Plays a random song if the target member is in position</p>
+    
+
+
+
+<div class="description">
+    Plays a random song if the target member is in position.
+
+The function first decides whether that member is the target member and is alone in a voice channel.
+If so, plays a random song from queries.json in that voice channel.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>oldState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">VoiceState</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A VoiceState object representing the previous voice state of a Guild Member</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>newState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">VoiceState</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A VoiceState object representing the current voice state of a Guild Member</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line73">line 73</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#play">play</a></li><li><a href="global.html#playAfterWaitTime">playAfterWaitTime</a></li><li><a href="global.html#rightMembersArePresent">rightMembersArePresent</a></li><li><a href="global.html#stopPlayback">stopPlayback</a></li><li><a href="global.html#voiceStateUpdateCallback">voiceStateUpdateCallback</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 17 2023 19:55:39 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
